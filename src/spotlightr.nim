@@ -9,7 +9,9 @@ const ytRawVidApi = "https://api.spotlightr.com/video/getExternalSource?source=h
 type
   SpotlightrVideoOption* = ref object
     url*, resolution*: string
-  SpotlightrVideo* = seq[SpotlightrVideoOption]
+  SpotlightrVideo* = ref object
+    url*: string
+    others*: seq[SpotlightrVideoOption]
     
 
 proc rawVideo*(videoUrl: string): Future[SpotlightrVideo] {.async.} =
@@ -22,12 +24,13 @@ proc rawVideo*(videoUrl: string): Future[SpotlightrVideo] {.async.} =
   let json = parseJson await client.getContent ytRawVidApi & ytCode
   close client
 
+  new result
+  result.url.add json["URL"].getStr
   for video in json["optimizedUrls"]:
     let vid = new SpotlightrVideoOption
     vid.url = video["url"].getStr
     vid.resolution = video["res"].getStr
-    result.add vid
+    result.others.add vid
 
 when isMainModule:
-  for vid in waitFor rawVideo "https://renatameins.cdn.spotlightr.com/watch/MTI2NzAxNg":
-    echo vid[]
+  echo "https://renatameins.cdn.spotlightr.com/watch/MTI2NzAxNg".rawVideo.waitFor[]
