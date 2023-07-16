@@ -21,8 +21,6 @@ proc rawVideo*(videoUrl: string): Future[SpotlightrVideo] {.async.} =
     html = await client.getContent videoUrl
     ytCode = html.between("youtube.com/vi/", "/")
 
-  echo ytRawVidApi & ytCode
-
   let json = parseJson await client.getContent ytRawVidApi & ytCode
   close client
 
