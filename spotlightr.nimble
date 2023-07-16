@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.1.1"
+version       = "0.1.2"
 author        = "Thiago Navarro"
 description   = "Spotlightr basic extractor to get the video"
 license       = "MIT"
@@ -9,6 +9,6 @@ srcDir        = "src"
 
 # Dependencies
 
-requires "nim >= 1.9.5"
+requires "nim >= 1.6.0"
 
 requires "util"
