@@ -19,7 +19,9 @@ proc rawVideo*(videoUrl: string): Future[SpotlightrVideo] {.async.} =
   let client = newAsyncHttpClient "Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0"
   let
     html = await client.getContent videoUrl
-    ytCode = html.between("youtube.com/vi/", "/maxresdefault")
+    ytCode = html.between("youtube.com/vi/", "/")
+
+  echo ytRawVidApi & ytCode
 
   let json = parseJson await client.getContent ytRawVidApi & ytCode
   close client
@@ -33,4 +35,4 @@ proc rawVideo*(videoUrl: string): Future[SpotlightrVideo] {.async.} =
     result.others.add vid
 
 when isMainModule:
-  echo "https://renatameins.cdn.spotlightr.com/watch/MTI2NzAxNg".rawVideo.waitFor[]
+  echo "https://renatameins.cdn.spotlightr.com/watch/MTIyNjQ5Ng".rawVideo.waitFor[]

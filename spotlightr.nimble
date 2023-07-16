@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.1.2"
+version       = "0.1.3"
 author        = "Thiago Navarro"
 description   = "Spotlightr basic extractor to get the video"
 license       = "MIT"

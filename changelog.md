@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.1.3 (16/07/2023)
+
+- Fixed Youtube code extraction
+
 ## Version 0.1.2 (16/07/2023)
 
 - Changed minimum Nim version for 1.6.0
